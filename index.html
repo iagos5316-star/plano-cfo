@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#b3261e">
+<meta name="color-scheme" content="light dark">
+<title>Plano CFO – CBMPI</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Plano CFO">
+<style>
+:root{--bg:#f4f3ef;--card:#fff;--tx:#1d1d1b;--mut:#6b6a65;--bd:#e4e2da;--ac:#b3261e;--ac2:#fbebeb;--ok:#2e7d32;--sh:0 1px 3px rgba(0,0,0,.08)}
+@media (prefers-color-scheme:dark){:root:not([data-th=light]){--bg:#121211;--card:#1f1f1e;--tx:#efeee9;--mut:#a5a49c;--bd:#33322e;--ac:#ff8a80;--ac2:#3a2523;--ok:#81c784;--sh:none}}
+:root[data-th=dark]{--bg:#121211;--card:#1f1f1e;--tx:#efeee9;--mut:#a5a49c;--bd:#33322e;--ac:#ff8a80;--ac2:#3a2523;--ok:#81c784;--sh:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-top:env(safe-area-inset-top)}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
+#app{max-width:640px;margin:0 auto;padding:14px 14px calc(150px + env(safe-area-inset-bottom));min-height:100dvh}
+h1{font-size:1.35rem;margin:4px 0 2px}
+h2{font-size:1.1rem;margin:18px 0 8px}
+.t{font-size:.8rem;color:var(--mut);font-weight:400}
+.hero{background:linear-gradient(135deg,var(--ac),#7a1712);color:#fff;border-radius:20px;padding:18px;margin-bottom:14px}
+.hero h1{margin:0 0 4px;font-size:1.4rem}.hero p{margin:0;opacity:.92;font-size:.95rem}
+.chips{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.chip{background:rgba(255,255,255,.2);border-radius:99px;padding:4px 12px;font-size:.85rem}
+.s{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:16px;padding:12px;margin-bottom:10px;border-left:6px solid var(--c);box-shadow:var(--sh);min-height:72px}
+.s.dn{opacity:.6}.s.dn .st{text-decoration:line-through}
+.ck{flex:none;width:44px;height:44px;border-radius:50%;border:2.5px solid var(--c);font-size:1.3rem;color:#fff;display:grid;place-items:center}
+.s.dn .ck{background:var(--c)}
+.sb{flex:1;min-width:0}
+.sn{font-weight:650;font-size:.95rem;color:var(--c)}
+.st{font-size:.95rem;overflow-wrap:anywhere}
+.pl{flex:none;width:44px;height:44px;border-radius:50%;background:var(--bg);font-size:1rem}
+.row{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none;scroll-snap-type:x proximity}
+.row::-webkit-scrollbar{display:none}
+.wc{flex:none;scroll-snap-align:center;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:8px 12px;min-width:84px;text-align:center;font-size:.9rem;position:relative}
+.wc.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.wc.on .t{color:#ffe}
+.wc.ok:after{content:"✓";position:absolute;top:2px;right:7px;font-size:.75rem;color:var(--ok)}
+.wc.on.ok:after{color:#fff}
+details{background:var(--bg);margin-bottom:10px}
+summary{list-style:none;display:flex;align-items:center;gap:10px;background:var(--card);border-radius:14px;padding:14px;font-weight:650;cursor:pointer;box-shadow:var(--sh);min-height:52px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"▾";margin-left:auto;color:var(--mut)}
+details[open] summary:after{content:"▴"}
+details[open] summary{margin-bottom:10px}
+.td summary{outline:2px solid var(--ac)}
+.pill{font-size:.78rem;background:var(--bd);border-radius:99px;padding:2px 9px;font-weight:500}
+.bar{height:8px;background:var(--bd);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c,var(--ok));transition:width .3s}
+.sc{background:var(--card);border-left:6px solid var(--c);border-radius:16px;padding:14px;margin-bottom:10px;width:100%;text-align:left;box-shadow:var(--sh);display:block}
+.sc b{display:block;margin-bottom:6px}
+.note{background:var(--ac2);border-radius:12px;padding:10px 12px;font-size:.88rem;margin-bottom:12px}
+.btn{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin:0 8px 8px 0;font-size:.92rem;min-height:46px}
+.btn.red{color:var(--ac);border-color:var(--ac)}
+.ring{width:150px;height:150px;border-radius:50%;margin:8px auto 14px;display:grid;place-items:center;background:conic-gradient(var(--ok) calc(var(--p)*1%),var(--bd) 0)}
+.ring div{width:116px;height:116px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:1.9rem;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.gc{border-radius:12px;padding:10px 0;text-align:center;font-size:.85rem;border:1px solid var(--bd);background:var(--card);position:relative;overflow:hidden}
+.gc i{position:absolute;left:0;bottom:0;height:5px;background:var(--ok)}
+.stats{display:flex;gap:10px}.stats div{flex:1;background:var(--card);border-radius:14px;padding:12px;text-align:center;box-shadow:var(--sh)}
+.stats b{display:block;font-size:1.4rem}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom);z-index:20}
+nav button{flex:1;padding:8px 0 7px;font-size:.72rem;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px;min-height:60px}
+nav button span{font-size:1.4rem;line-height:1}
+nav button.on{color:var(--ac);font-weight:700}
+#tb{position:fixed;left:10px;right:10px;bottom:calc(68px + env(safe-area-inset-bottom));background:#222;color:#fff;border-radius:18px;padding:10px 12px;display:none;align-items:center;gap:8px;z-index:30;box-shadow:0 4px 16px rgba(0,0,0,.35);max-width:620px;margin:0 auto}
+#tb.on{display:flex}
+#tb .nm{flex:1;min-width:0;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tb .tm{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+#tb button{width:44px;height:44px;border-radius:50%;background:#444;color:#fff;font-size:1.1rem}
+#tb.end{background:var(--ok)}
+#toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translate(-50%,-90px);background:#222;color:#fff;border-radius:99px;padding:10px 18px;font-size:.9rem;z-index:40;transition:transform .25s;max-width:92vw;text-align:center}
+#toast.on{transform:translate(-50%,0)}
+.qc{background:var(--card);border-left:6px solid var(--c,var(--ac));border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
+.qrow{display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:8px}
+.stp{display:flex;align-items:center;gap:6px}
+.stp button{width:46px;height:46px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);font-size:1.4rem}
+.stp input,.dt{height:46px;text-align:center;font:inherit;border:1px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx)}
+.stp input{width:72px}.dt{width:100%;padding:0 10px;margin-top:6px}
+.g{color:var(--ok)}.r{color:var(--ac)}
+.ar{border-top:1px solid var(--bd);padding:10px 0}.ar:first-of-type{border-top:0}
+.an{font-size:.92rem;font-weight:600}.ar.bad .an{color:var(--ac)}
+.am{display:flex;gap:8px;align-items:center;margin:2px 0 6px;flex-wrap:wrap}
+.as{display:flex;gap:10px;flex-wrap:wrap}
+.stp2{display:flex;align-items:center;gap:2px;border-radius:12px;padding:3px;background:var(--bg)}
+.stp2.c{outline:1.5px solid var(--ok)}.stp2.e{outline:1.5px solid var(--ac)}
+.stp2 .sg{width:20px;text-align:center;font-weight:700}.stp2.c .sg{color:var(--ok)}.stp2.e .sg{color:var(--ac)}
+.stp2 button{width:40px;height:40px;border-radius:10px;font-size:1.3rem;background:var(--card);border:1px solid var(--bd)}
+.stp2 input{width:46px;height:40px;text-align:center;font:inherit;border:0;background:transparent;color:var(--tx)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="tb"><div class="nm"><div id="tn"></div><div class="tm" id="tt">00:00</div></div><button data-act="tpause" id="tp" aria-label="Pausar">⏸</button><button data-act="tdone" aria-label="Concluir">✓</button><button data-act="tstop" aria-label="Parar">✕</button></div>
+<div id="toast"></div>
+<nav id="nav">
+<button data-act="tab" data-v="hoje"><span>🏠</span>Hoje</button>
+<button data-act="tab" data-v="sem"><span>📅</span>Semanas</button>
+<button data-act="tab" data-v="mat"><span>📚</span>Matérias</button>
+<button data-act="tab" data-v="q"><span>✏️</span>Questões</button>
+<button data-act="tab" data-v="prog"><span>📊</span>Progresso</button>
+</nav>
+<script>
+(function(){
+var W=[
+{d:"09 a 14/11",n:"Na Legislação, o Estatuto PM (Lei 3.808/1981) é estudado em 6 partes, na ordem dos títulos da lei (semanas 1 a 3).",r:[
+[["Português","compreensão de textos; gênero textual, tipo textual e domínio discursivo"],["Redação","estrutura do texto dissertativo-argumentativo"]],
+[["Informática","conceitos básicos, microcomputador, rede local, Internet, placa de rede com e sem fio"],["Atualidades","relações políticas e socioeconômicas no espaço mundial"]],
+[["Dir. Administrativo","Estado, governo e administração pública (conceitos, elementos, poderes, natureza e fins)"],["Administração","abordagem clássica"]],
+[["Português","características dos gêneros e tipos textuais; intergenericidade"],["Redação","tese e introdução"]],
+[["Dir. Constitucional","direitos e garantias fundamentais (noções gerais)"],["Legislação","Estatuto PM, parte 1 (disposições preliminares, hierarquia e disciplina)"]],
+[["Dir. Administrativo","princípios da administração pública"],["Dir. Constitucional","direitos e deveres individuais e coletivos (art. 5º, parte 1)"],["Legislação","Estatuto PM, parte 2 (ingresso, cargos, postos e graduações)"]]]},
+{d:"16 a 21/11",r:[
+[["Português","intertextualidade (paráfrase e paródia)"],["Redação","desenvolvimento e argumentação"]],
+[["Informática","Windows XP e 7, arquivos e pastas"],["Atualidades","disputas interimperialistas e transformações do espaço capitalista"]],
+[["Dir. Administrativo","organização administrativa (direta e indireta)"],["Administração","abordagem burocrática"]],
+[["Português","conectores sequenciadores; relações lógico-discursivas entre orações e parágrafos"],["Redação","conclusão e proposta de intervenção"]],
+[["Dir. Constitucional","art. 5º, parte 2, e remédios constitucionais"],["Legislação","Estatuto PM, parte 3 (direitos e prerrogativas)"]],
+[["Dir. Administrativo","agentes públicos"],["Dir. Constitucional","direitos sociais"],["Legislação","Estatuto PM, parte 4 (deveres, ética e valores militares)"]]]},
+{d:"23 a 28/11",r:[
+[["Português","funções da linguagem"],["Redação","coesão e conectivos"]],
+[["Informática","Windows, aplicativos, ferramentas, utilitários, dispositivos e painel de controle"],["Atualidades","formação dos blocos de poder"]],
+[["Dir. Administrativo","improbidade (Lei 8.429/1992), parte 1: atos e sanções"],["Administração","abordagem sistêmica"]],
+[["Português","níveis da linguagem"],["Redação","paragrafação e progressão de ideias"]],
+[["Dir. Constitucional","nacionalidade"],["Legislação","Estatuto PM, parte 5 (transgressões e punições)"]],
+[["Dir. Administrativo","improbidade, parte 2, e questões"],["Dir. Constitucional","direitos políticos"],["Legislação","Estatuto PM, parte 6 (demissão, licenciamento, reforma, exclusão e transferência)"]]]},
+{d:"30/11 a 05/12",r:[
+[["Português","metáfora, metonímia e figuras de palavra"],["Redação","repertório sociocultural (use os temas de Atualidades)"]],
+[["Informática","Word e Writer I (janelas, menus, barras, estilos, modelos, arquivos, layout e impressão)"],["Atualidades","sistemas político-econômicos contemporâneos e áreas de influência"]],
+[["Dir. Administrativo","licitações (Lei 8.666/1993), modalidades"],["Administração","evolução da administração pública no Brasil após 1930, reformas e nova gestão pública"]],
+[["Português","figuras de pensamento e de sintaxe"],["Redação","rascunho de 15 min e um texto curto de 20 linhas"]],
+[["Dir. Constitucional","partidos políticos"],["Legislação","Regulamento Disciplinar da PM (Decreto 3.548/1980), parte 1"]],
+[["Dir. Administrativo","dispensa e inexigibilidade de licitação"],["Dir. Constitucional","Poder Executivo, atribuições do Presidente"],["Legislação","Regulamento Disciplinar, parte 2 (punições, recursos e comportamento)"]]]},
+{d:"07 a 12/12",r:[
+[["Português","formação de palavras; radicais, prefixos e sufixos"],["Redação","norma culta no texto, erros mais comuns"]],
+[["Informática","Word e Writer II (edição, formatação, cabeçalho e rodapé, tabelas, colunas, correspondências, revisão, referências e proteção)"],["Atualidades","globalização e fragmentação do espaço"]],
+[["Dir. Administrativo","poderes hierárquico, disciplinar e regulamentar"],["Administração","princípios e sistemas de administração estadual; processo administrativo"]],
+[["Português","concordância nominal"],["Redação","treino de introdução e conclusão (3 versões de cada)"]],
+[["Dir. Constitucional","responsabilidade do Presidente da República"],["Legislação","Conselho de Disciplina (Lei 3.729/1980)"]],
+[["Dir. Administrativo","poder de polícia"],["Dir. Constitucional","defesa do Estado e das instituições democráticas"],["Legislação","Conselho de Justificação (Lei 3.728/1980)"]]]},
+{d:"14 a 19/12",r:[
+[["Português","concordância verbal"],["Redação","texto completo 1 (tema: segurança pública), em até 1h"]],
+[["Informática","Excel e Calc I (janelas, menus, arquivos, formatação, impressão, copiar, recortar e colar)"],["Atualidades","conflitos étnicos, políticos e religiosos atuais"]],
+[["Dir. Administrativo","usos e abuso do poder"],["Administração","planejamento e organização"]],
+[["Português","regência"],["Redação","correção e reescrita do texto 1"]],
+[["Dir. Constitucional","segurança pública (organização)"],["Legislação","organização básica do CBMPI (Lei 5.949/2009)"]],
+[["Dir. Administrativo","controle administrativo"],["Dir. Constitucional","ordem social, base e objetivos; seguridade social"],["Legislação","competência do CBMPI e Código de Segurança Contra Incêndio e Pânico (Lei 5.483/2005)"]]]},
+{d:"21 a 26/12",r:[
+[["Português","colocação pronominal"],["Redação","texto completo 2 (tema: questão ambiental)"]],
+[["Informática","Excel e Calc II (gráficos, dados, filtro, classificação, mesclagem de células e cabeçalhos)"],["Atualidades","organismos internacionais"]],
+[["Dir. Administrativo","controle judicial e legislativo"],["Administração","direção e controle"]],
+[["Português","ortografia e acentuação gráfica"],["Redação","correção e reescrita do texto 2"]],
+[["Dir. Constitucional","meio ambiente e família"],["Legislação","promoção de oficiais (Lei 5.461/2005)"]],
+[["Dir. Administrativo","responsabilidade civil do Estado"],["Dir. Constitucional","criança, adolescente, idoso e índio"],["Legislação","promoção de praças (Lei 5.462/2005)"]]]},
+{d:"28/12 a 02/01",r:[
+[["Português","pontuação"],["Redação","texto completo 3 (tema: Brasil e relações econômicas internacionais)"]],
+[["Informática","PowerPoint e Impress (slides, modelos, temas, figuras, gráficos, transição, anotações e slide mestre)"],["Atualidades","questão ambiental no âmbito nacional"]],
+[["Dir. Administrativo","revisão de Estado, princípios, organização e agentes públicos, com 10 questões"],["Administração","estrutura e cultura organizacional"]],
+[["Português","revisão geral e questões de interpretação"],["Redação","correção e reescrita do texto 3"]],
+[["Dir. Constitucional","revisão de direitos fundamentais, nacionalidade e direitos políticos"],["Legislação","opção de transferência entre PM e CBMPI (Lei 5.460/2005)"]],
+[["Dir. Administrativo","questões de improbidade e licitações"],["Dir. Constitucional","questões do art. 5º e direitos sociais"],["Legislação","criação de quadros de oficiais e praças (Lei 5.459/2005)"]]]},
+{d:"04 a 09/01",r:[
+[["Português","questões de concordância, regência e colocação"],["Redação","texto completo 4 (tema: prevenção de incêndios e segurança pública)"]],
+[["Informática","navegadores (Internet Explorer, Firefox e Chrome: favoritos, histórico, download, plugins e configurações)"],["Atualidades","questão ambiental no âmbito internacional"]],
+[["Dir. Administrativo","revisão de poderes administrativos e controle, com 10 questões"],["Administração","administração financeira e orçamentária; orçamento público, princípios orçamentários e diretrizes orçamentárias"]],
+[["Português","questões de figuras de linguagem, intertextualidade e funções da linguagem"],["Redação","correção e reescrita do texto 4"]],
+[["Dir. Constitucional","revisão de Poder Executivo, segurança pública e ordem social"],["Legislação","desvinculação do Corpo de Bombeiros da PM (Lei 5.276/2012)"]],
+[["Dir. Administrativo","questões de poderes e responsabilidade civil"],["Dir. Constitucional","questões de Executivo e ordem social"],["Legislação","revisão geral, com quadro comparativo das leis do CBMPI"]]]},
+{d:"11 a 16/01",r:[
+[["Português","simulado de 20 questões (interpretação e gramática)"],["Redação","texto completo 5 (tema livre entre os de Atualidades)"]],
+[["Informática","segurança da informação e backup"],["Atualidades","relações econômicas entre o Brasil e o mundo"]],
+[["Dir. Administrativo","simulado de 20 questões, com correção"],["Administração","SIAFEM; receita pública (categorias, fontes, estágios e dívida ativa)"]],
+[["Português","revisão dos erros do simulado"],["Redação","correção e reescrita do texto 5"]],
+[["Dir. Constitucional","simulado de 20 questões"],["Legislação","revisão do Estatuto e do Regulamento Disciplinar, com fichas dos artigos-chave"]],
+[["Dir. Administrativo","revisão dos erros"],["Dir. Constitucional","revisão dos erros"],["Legislação","revisão dos Conselhos de Disciplina e de Justificação e das leis do CBMPI"]]]},
+{d:"18 a 23/01",r:[
+[["Português","revisão das regras de gramática em que mais errou"],["Redação","texto completo 6, com tempo cronometrado"]],
+[["Informática","criptografia, chave pública e privada, engenharia social e golpes na Internet"],["Atualidades","revisão geral e notícias do último ano (conflitos, organismos e meio ambiente)"]],
+[["Dir. Administrativo","revisão de licitações e improbidade, com questões"],["Administração","despesa pública (categorias e estágios); suprimento de fundos; restos a pagar; despesas de exercícios anteriores; conta única do Tesouro Estadual"]],
+[["Português","simulado de 20 questões"],["Redação","correção e reescrita do texto 6"]],
+[["Dir. Constitucional","revisão de segurança pública, art. 5º e direitos sociais"],["Legislação","simulado de 20 questões"]],
+[["Dir. Administrativo","questões mistas"],["Dir. Constitucional","questões mistas"],["Legislação","revisão dos erros do simulado"]]]},
+{d:"25 a 30/01",r:[
+[["Português","revisão final e questões"],["Redação","texto completo 7 e reescrita"]],
+[["Informática","revisão geral e 20 questões"],["Atualidades","20 questões e revisão dos erros"]],
+[["Dir. Administrativo","revisão final"],["Administração","ética no serviço público (comportamento profissional, atitudes no serviço, organização do trabalho e prioridade em serviço)"]],
+[["Português","revisão dos erros acumulados"],["Redação","revisão do caderno de erros de escrita"]],
+[["Dir. Constitucional","revisão final"],["Legislação","revisão final pelas fichas"]],
+[["Dir. Administrativo","10 questões"],["Dir. Constitucional","10 questões"],["Legislação","10 questões"]]]}
+];
+var KEY="cfo-cbmpi-v2",START=null;
+var DN=["Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+var SUB=["Português","Redação","Informática","Atualidades","Dir. Administrativo","Administração","Dir. Constitucional","Legislação"];
+var COL={"Português":"#e53935","Redação":"#fb8c00","Informática":"#1e88e5","Atualidades":"#00897b","Dir. Administrativo":"#8e24aa","Administração":"#8d6e63","Dir. Constitucional":"#3949ab","Legislação":"#43a047"};
+var S={c:{},l:{},th:"auto",q:{},start:null,saved:0};
+try{var r=JSON.parse(localStorage.getItem(KEY));if(r)S=Object.assign(S,r)}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function pdate(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function idate(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function mon(d){var x=mid(d),w=(x.getDay()+6)%7;return new Date(x.getFullYear(),x.getMonth(),x.getDate()-w)}
+function nextMon(){var x=mid(new Date()),w=(x.getDay()+6)%7;return new Date(x.getFullYear(),x.getMonth(),x.getDate()+(w==0?0:7-w))}
+function calcStart(){START=S.start?mon(pdate(S.start)):nextMon()}
+calcStart();
+function fmy(d){return d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric"})}
+function endFor(d){var m=mon(d);return new Date(m.getFullYear(),m.getMonth(),m.getDate()+11*7+5)}
+function studyDays(a,b){var n=0,x=mid(a),y=mid(b);while(x<=y){if(x.getDay()!=0)n++;x=new Date(x.getFullYear(),x.getMonth(),x.getDate()+1)}return n}
+function addStudy(d,n){var x=mid(d);n=Math.min(n,4000);while(n>0){x=new Date(x.getFullYear(),x.getMonth(),x.getDate()+1);if(x.getDay()!=0)n--}return x}
+function est(){var from=pdate(S.start),today=mid(new Date()),p=frac(function(){return true}),D=p[0],R=p[1]-p[0];
+ if(R==0)return{d:today,msg:"Plano concluído."};
+ if(today<from||D==0)return null;
+ var pace=D/Math.max(1,studyDays(from,today)),e=addStudy(today,Math.ceil(R/pace)),df=Math.round((e-endFor(from))/864e5);
+ return{d:e,msg:"Ritmo atual: "+(Math.round(pace*10)/10).toString().replace(".",",")+(Math.round(pace*10)/10==1?" sessão":" sessões")+" por dia de estudo. "+(Math.abs(df)<=2?"Você está no ritmo do plano.":df>0?"Cerca de "+df+" dias depois do previsto.":"Cerca de "+(-df)+" dias antes do previsto.")}}
+function dateCard(){if(!S.start)return"";var e=est(),from=pdate(S.start),en=endFor(from),
+ h='<div class="qc"><div class="qrow"><span>📅 Início</span><b>'+fmy(from)+'</b></div><div class="qrow"><span>🏁 Término previsto</span><b>'+fmy(en)+'</b></div><div class="qrow"><span>📈 Pelo seu ritmo</span><b>'+(e?fmy(e.d):"—")+'</b></div><div class="t">'+(e?e.msg:(from>mid(new Date())?"O plano ainda não começou.":"Marque sessões como concluídas para ver a estimativa pelo seu ritmo."))+'</div>';
+ if(from.getTime()>START.getTime())h+='<div class="t" style="margin-top:6px">Você começa no meio da semana: as sessões dos dias anteriores ficam para recuperar e entram na estimativa.</div>';
+ return h+'</div>'}
+function saveNow(){var ok=false;try{S.saved=Date.now();localStorage.setItem(KEY,JSON.stringify(S));ok=localStorage.getItem(KEY)!==null}catch(e){}
+ try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+ if(ok){vib(30);toast("Salvo no celular às "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}));render()}else toast("Não foi possível salvar. Use o backup.")}
+function saveInfo(){return S.saved?"Último salvamento: "+new Date(S.saved).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"Ainda não salvo manualmente (as mudanças também são salvas sozinhas)"}
+var items=[],byKey={};
+W.forEach(function(w,wi){w.r.forEach(function(d,di){d.forEach(function(s,si){var it={k:wi+"-"+di+"-"+si,w:wi,d:di,sub:s[0],top:s[1],min:di==5?40:60};items.push(it);byKey[it.k]=it})})});
+var V={tab:"hoje",week:null,sub:null},O={},T=null,wl=null;
+var app=document.getElementById("app");
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function mid(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function iso(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function dfor(w,d){return new Date(START.getFullYear(),START.getMonth(),START.getDate()+w*7+d)}
+function fm(d){return d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})}
+function wlab(i){return fm(dfor(i,0))+" a "+fm(dfor(i,5))}
+function where(){if(!S.start)return{st:"setup"};var df=Math.round((mid(new Date())-START)/864e5);if(df<0)return{st:"pre",df:df};var w=Math.floor(df/7);if(w>11)return{st:"post"};return{st:"on",w:w,d:df%7}}
+function vib(n){try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}}
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.className="on";clearTimeout(toast.h);toast.h=setTimeout(function(){t.className=""},2600)}
+function done(k){return !!S.c[k]}
+function frac(f){var t=0,d=0;items.forEach(function(i){if(f(i)){t++;if(done(i.k))d++}});return[d,t]}
+function streak(){var n=0,d=mid(new Date());if(!S.l[iso(d)])d=new Date(d.getFullYear(),d.getMonth(),d.getDate()-1);while(S.l[iso(d)]>0){n++;d=new Date(d.getFullYear(),d.getMonth(),d.getDate()-1)}return n}
+function setDone(k,v){var id=iso(new Date());if(v&&!S.c[k]){S.c[k]=1;S.l[id]=(S.l[id]||0)+1}else if(!v&&S.c[k]){delete S.c[k];if(S.l[id]>0)S.l[id]--}save()}
+function card(it,wk){var dn=done(it.k),run=T&&T.k==it.k&&T.run;
+return '<div class="s'+(dn?' dn':'')+'" style="--c:'+COL[it.sub]+'"><button class="ck" data-act="chk" data-k="'+it.k+'" aria-label="Concluir">'+(dn?'✓':'')+'</button><div class="sb"><div class="sn">'+esc(it.sub)+' <span class="t">· '+it.min+' min'+(wk?' · Sem. '+(it.w+1)+' '+DN[it.d].slice(0,3):'')+'</span></div><div class="st">'+esc(it.top)+'</div></div><button class="pl" data-act="start" data-k="'+it.k+'" aria-label="Cronômetro">'+(run?'⏸':'▶')+'</button></div>'}
+function dayItems(w,d){return items.filter(function(i){return i.w==w&&i.d==d})}
+function hero(t,p,chips){return '<div class="hero"><h1>'+t+'</h1><p>'+p+'</p><div class="chips">'+(chips||[]).map(function(c){return '<span class="chip">'+c+'</span>'}).join("")+'</div></div>'}
+function pend(){var fr=S.start?Math.round((pdate(S.start)-START)/864e5):0,w=where(),lim=w.st=="pre"?-1:w.st=="post"?1e9:w.w*7+w.d;return items.filter(function(i){return !done(i.k)&&i.w*7+i.d<lim&&i.w*7+i.d>=fr})}
+function vHoje(){
+ var w=where();if(w.st=="setup")return vSetup();var h="",p=frac(function(){return true}),st=streak(),chips=[Math.round(p[0]/p[1]*100)+"% concluído","🔥 "+st+" dia"+(st==1?"":"s")+" seguido"+(st==1?"":"s")];
+ if(w.st=="pre"){var n=-w.df;h+=hero("Começa em "+n+" dia"+(n>1?"s":""),"Início: "+fm(pdate(S.start))+". Veja o primeiro dia.",chips);h+="<h2>Segunda, semana 1</h2>"+dayItems(0,0).map(function(i){return card(i)}).join("")}
+ else if(w.st=="post"){h+=hero("Plano concluído","As 12 semanas acabaram. Agora é fase de revisão.",chips);h+='<div class="note">Repita a rotina sem matéria nova: questões do dia + revisão das anotações, caderno de erros e um simulado completo por semana.</div>'}
+ else if(w.d==6){h+=hero("Domingo: descanso","Semana "+(w.w+1)+" encerrada. Recarregue para a próxima.",chips);if(w.w<11)h+="<h2>Segunda, semana "+(w.w+2)+"</h2>"+dayItems(w.w+1,0).map(function(i){return card(i)}).join("");else h+='<div class="note">Amanhã começa a fase de revisão.</div>'}
+ else{var li=dayItems(w.w,w.d),dd=li.filter(function(i){return done(i.k)}).length;
+  h+=hero(DN[w.d]+", "+fm(dfor(w.w,w.d)),"Semana "+(w.w+1)+" de 12 · "+dd+" de "+li.length+" sessões de hoje",chips);
+  if(W[w.w].n)h+='<div class="note">'+esc(W[w.w].n)+"</div>";
+  h+=li.map(function(i){return card(i)}).join("");
+  if(dd==li.length)h+='<div class="note">Dia fechado. Bom trabalho!</div>';
+  if(w.d<5){h+="<h2>Amanhã</h2>"+dayItems(w.w,w.d+1).map(function(i){return '<div class="t" style="margin:4px 0">• <b>'+esc(i.sub)+"</b>: "+esc(i.top)+"</div>"}).join("")}
+  else h+='<div class="t" style="margin-top:12px">Amanhã é domingo, dia de descanso.</div>'}
+ var pd=pend();if(pd.length)h+='<h2>Pendentes ('+pd.length+')</h2><details'+(O.pend?" open":"")+' data-d="pend"><summary>Ver sessões atrasadas</summary>'+pd.slice(0,20).map(function(i){return card(i,1)}).join("")+(pd.length>20?'<div class="t">Mostrando as 20 mais antigas.</div>':"")+"</details>";
+ return h.replace("</div></div>","</div></div>"+dateCard())}
+function vSetup(){return '<div class="hero"><h1>Quando você vai começar?</h1><p>Escolha o dia de início do plano.</p></div><div class="qc"><label class="t" for="sd">Data de início</label><input type="date" id="sd" class="dt" value="'+idate(nextMon())+'"><div class="qrow" style="margin-top:10px"><span>🏁 Término previsto</span><b id="prev">'+fmy(endFor(nextMon()))+'</b></div><div class="t" style="margin:8px 0">O plano tem 12 semanas, de segunda a sábado. É montado de segunda a sábado. Se você escolher um dia no meio da semana, a semana 1 se alinha à segunda-feira daquela semana, e os dias anteriores à sua data não contam como atrasados (continuam disponíveis na aba Semanas).</div><button class="btn red" data-act="setstart">Começar o plano</button></div>'}
+function vSem(){
+ var w=where(),cur=V.week;if(cur==null)cur=w.st=="on"?w.w:w.st=="post"?11:0;V.week=cur;
+ var h='<div class="row" id="wr">'+W.map(function(x,i){var f=frac(function(t){return t.w==i});return '<button class="wc'+(i==cur?" on":"")+(f[0]==f[1]?" ok":"")+'" data-act="week" data-w="'+i+'">Sem. '+(i+1)+'<div class="t">'+fm(dfor(i,0))+"</div></button>"}).join("")+"</div>";
+ var f=frac(function(t){return t.w==cur});
+ h+="<h1>Semana "+(cur+1)+' <span class="t">'+wlab(cur)+" · "+f[0]+"/"+f[1]+"</span></h1>";
+ if(W[cur].n)h+='<div class="note">'+esc(W[cur].n)+"</div>";
+ h+='<div class="t" style="margin-bottom:8px">Deslize para os lados para trocar de semana.</div>';
+ for(var d=0;d<6;d++){var li=dayItems(cur,d),k="d"+cur+"-"+d,dd=li.filter(function(i){return done(i.k)}).length,td=w.st=="on"&&w.w==cur&&w.d==d;
+  var op=O[k]!==undefined?O[k]:td;
+  h+='<details data-d="'+k+'"'+(op?" open":"")+(td?' class="td"':"")+"><summary>"+DN[d]+' <span class="t">'+fm(dfor(cur,d))+'</span><span class="pill">'+dd+"/"+li.length+"</span></summary>"+li.map(function(i){return card(i)}).join("")+"</details>"}
+ return h}
+function vMat(){
+ if(!V.sub){var h="<h1>Matérias</h1><div class='t' style='margin-bottom:10px'>Toque para ver todos os assuntos na ordem de estudo.</div>";
+  SUB.forEach(function(s){var f=frac(function(i){return i.sub==s});h+='<button class="sc" style="--c:'+COL[s]+'" data-act="sub" data-s="'+esc(s)+'"><b>'+esc(s)+' <span class="t">'+f[0]+" de "+f[1]+' sessões</span></b><div class="bar"><i style="width:'+(f[1]?f[0]/f[1]*100:0)+'%"></i></div></button>'});
+  return h}
+ var f=frac(function(i){return i.sub==V.sub});
+ return '<button class="btn" data-act="sub" data-s="">← Voltar</button><h1 style="color:'+COL[V.sub]+'">'+esc(V.sub)+' <span class="t">'+f[0]+"/"+f[1]+"</span></h1>"+items.filter(function(i){return i.sub==V.sub}).map(function(i){return card(i,1)}).join("")}
+var QT={
+"Português":["Compreensão de textos; gênero, tipo textual e domínio discursivo","Características dos gêneros e tipos; intergenericidade","Intertextualidade: paráfrase e paródia","Conectores e relações lógico-discursivas","Funções da linguagem","Níveis da linguagem","Metáfora, metonímia e figuras de palavra","Figuras de pensamento e de sintaxe","Formação de palavras; radicais, prefixos e sufixos","Concordância nominal","Concordância verbal","Regência","Colocação pronominal","Ortografia e acentuação gráfica","Pontuação"],
+"Informática":["Conceitos básicos, rede local e Internet","Windows: arquivos e pastas","Windows: aplicativos, utilitários e painel de controle","Word e Writer I","Word e Writer II","Excel e Calc I","Excel e Calc II","PowerPoint e Impress","Navegadores","Segurança da informação e backup","Criptografia, engenharia social e golpes"],
+"Atualidades":["Relações políticas e socioeconômicas mundiais","Disputas interimperialistas e espaço capitalista","Blocos de poder","Sistemas político-econômicos e áreas de influência","Globalização e fragmentação do espaço","Conflitos étnicos, políticos e religiosos","Organismos internacionais","Questão ambiental nacional","Questão ambiental internacional","Relações econômicas Brasil e mundo"],
+"Dir. Administrativo":["Estado, governo e administração pública","Princípios da administração pública","Administração direta e indireta","Agentes públicos","Improbidade administrativa (Lei 8.429/1992)","Licitações: modalidades (Lei 8.666/1993)","Dispensa e inexigibilidade","Poderes hierárquico, disciplinar e regulamentar","Poder de polícia","Usos e abuso do poder","Controle administrativo","Controle judicial e legislativo","Responsabilidade civil do Estado"],
+"Administração":["Abordagem clássica","Abordagem burocrática","Abordagem sistêmica","Evolução da administração pública após 1930 e nova gestão pública","Princípios e sistemas de administração estadual; processo administrativo","Planejamento e organização","Direção e controle","Estrutura e cultura organizacional","Orçamento público: princípios e diretrizes","SIAFEM e receita pública","Despesa pública, suprimento de fundos e restos a pagar","Ética no serviço público"],
+"Dir. Constitucional":["Direitos e garantias fundamentais","Direitos e deveres individuais e coletivos (art. 5º)","Remédios constitucionais","Direitos sociais","Nacionalidade","Direitos políticos","Partidos políticos","Poder Executivo: atribuições do Presidente","Responsabilidade do Presidente","Defesa do Estado e das instituições democráticas","Segurança pública (art. 144)","Ordem social e seguridade social","Meio ambiente e família","Criança, adolescente, idoso e índio"],
+"Legislação":["Estatuto dos PM (Lei 3.808/1981)","Regulamento Disciplinar (Decreto 3.548/1980)","Conselho de Disciplina (Lei 3.729/1980)","Conselho de Justificação (Lei 3.728/1980)","Organização básica do CBMPI (Lei 5.949/2009)","Competência e Código de Segurança Contra Incêndio (Lei 5.483/2005)","Promoção de oficiais (Lei 5.461/2005)","Promoção de praças (Lei 5.462/2005)","Transferência PM e CBMPI (Lei 5.460/2005)","Quadros de oficiais e praças (Lei 5.459/2005)","Desvinculação da PM (Lei 5.276/2012)"]};
+var QS=["Português","Informática","Atualidades","Dir. Administrativo","Administração","Dir. Constitucional","Legislação"];
+function qg(s,i){var q=S.q[s+"|"+i]||{};return{c:q.c||0,e:q.e||0}}
+function pc(c,e){return c+e?Math.round(c/(c+e)*100):0}
+function sub(s){var c=0,e=0;QT[s].forEach(function(_,i){var q=qg(s,i);c+=q.c;e+=q.e});return{c:c,e:e}}
+function stp(s,i,f){var v=qg(s,i)[f],r='data-s="'+esc(s)+'" data-i="'+i+'" data-f="'+f+'"',l=f=="c"?"Certas":"Erradas";
+ return '<div class="stp2 '+f+'"><span class="sg">'+(f=="c"?"✓":"✗")+'</span><button data-act="qadd" '+r+' data-n="-1" aria-label="Menos '+l+'">−</button><input type="number" inputmode="numeric" min="0" value="'+v+'" data-q="'+esc(s)+'" data-i="'+i+'" data-f="'+f+'" aria-label="'+l+'"><button data-act="qadd" '+r+' data-n="1" aria-label="Mais '+l+'">+</button></div>'}
+function qrow(s,i){var q=qg(s,i),n=q.c+q.e,p=pc(q.c,q.e),bad=n>=5&&p<60;
+ return '<div class="ar'+(bad?' bad':'')+'"><div class="an">'+esc(QT[s][i])+'</div><div class="am"><span class="t">'+(n?n+' feitas · '+p+'% de acerto':'sem questões')+'</span>'+(bad?'<span class="pill">atenção</span>':'')+'</div><div class="as">'+stp(s,i,"c")+stp(s,i,"e")+'</div></div>'}
+function vQ(){
+ var tc=0,te=0,all=[];
+ QS.forEach(function(s){QT[s].forEach(function(t,i){var q=qg(s,i);tc+=q.c;te+=q.e;if(q.e>0)all.push({s:s,i:i,c:q.c,e:q.e})})});
+ all.sort(function(a,b){return b.e-a.e||(b.e/(b.c+b.e))-(a.e/(a.c+a.e))});
+ var h='<h1>Questões</h1><div class="stats"><div><b>'+(tc+te)+'</b><span class="t">feitas</span></div><div><b class="g">'+tc+'</b><span class="t">certas</span></div><div><b class="r">'+te+'</b><span class="t">erradas</span></div></div>';
+ h+='<div class="t" style="margin:10px 0">Acerto geral: <b>'+pc(tc,te)+'%</b></div><button class="btn red" data-act="save">💾 Salvar no celular</button><div class="t" style="margin-bottom:10px">'+saveInfo()+'</div>';
+ h+='<div class="qc"><b>Onde você mais erra</b>';
+ if(all.length){all.slice(0,5).forEach(function(x){var n=x.c+x.e;h+='<div class="qrow"><span style="min-width:0"><b style="font-size:.9rem">'+esc(QT[x.s][x.i])+'</b><div class="t" style="color:'+COL[x.s]+'">'+esc(x.s)+'</div></span><span style="text-align:right;flex:none"><b class="r">'+x.e+' erro'+(x.e>1?"s":"")+'</b><div class="t">de '+n+' · '+Math.round(x.e/n*100)+'% erro</div></span></div>'})}
+ else h+='<div class="t" style="margin-top:6px">Registre questões nos assuntos abaixo para ver aqui os que você mais erra.</div>';
+ h+='</div><button class="btn" data-act="qsort">Ordem dos assuntos: '+(S.qs=="err"?"mais erros primeiro":"ordem do edital")+'</button><div class="t" style="margin:0 0 10px">Toque na matéria para abrir os assuntos. ✓ = certas, ✗ = erradas.</div>';
+ QS.forEach(function(s){var t=sub(s),n=t.c+t.e,k="q-"+s,idx=QT[s].map(function(_,i){return i});
+  if(S.qs=="err")idx.sort(function(a,b){return qg(s,b).e-qg(s,a).e||a-b});
+  h+='<details data-d="'+esc(k)+'"'+(O[k]?" open":"")+'><summary style="border-left:6px solid '+COL[s]+'"><span>'+esc(s)+'</span><span class="pill">'+n+' feitas · '+pc(t.c,t.e)+'%</span></summary><div class="qc" style="--c:'+COL[s]+'"><div class="qrow"><span class="g"><b>✓ '+t.c+' certas</b></span><span class="r"><b>✗ '+t.e+' erradas</b></span></div>'+idx.map(function(i){return qrow(s,i)}).join("")+'</div></details>'});
+ return h}
+function vProg(){
+ var p=frac(function(){return true}),pc=Math.round(p[0]/p[1]*100),st=streak(),days=Object.keys(S.l).filter(function(k){return S.l[k]>0}).length;
+ var h='<h1>Progresso</h1><div class="ring" style="--p:'+pc+'"><div>'+pc+"%</div></div>";
+ h+='<div class="stats"><div><b>'+p[0]+'</b><span class="t">sessões feitas</span></div><div><b>'+st+'</b><span class="t">dias seguidos</span></div><div><b>'+days+'</b><span class="t">dias estudados</span></div></div>';
+ h+="<h2>Datas</h2>"+dateCard()+"<h2>Semanas</h2><div class='grid'>"+W.map(function(x,i){var f=frac(function(t){return t.w==i});return '<button class="gc" data-act="goweek" data-w="'+i+'">S'+(i+1)+'<i style="width:'+(f[0]/f[1]*100)+'%"></i></button>'}).join("")+"</div>";
+ h+="<h2>Por matéria</h2>";SUB.forEach(function(s){var f=frac(function(i){return i.sub==s});h+='<div style="margin-bottom:10px;--c:'+COL[s]+'"><div style="display:flex;justify-content:space-between;font-size:.9rem"><span>'+esc(s)+'</span><span class="t">'+f[0]+"/"+f[1]+'</span></div><div class="bar"><i style="width:'+(f[0]/f[1]*100)+'%"></i></div></div>'});
+ h+="<h2>Opções</h2><div class='qc'><label class='t' for='sd2'>Data de início do plano</label><input type='date' id='sd2' class='dt' value='"+(S.start||"")+"'><div class='qrow' style='margin-top:8px'><span class='t'>Término previsto</span><b id='prev2'>"+(S.start?fmy(endFor(pdate(S.start))):"")+"</b></div><button class='btn' style='margin-top:4px' data-act='chgstart'>Alterar data</button></div><button class='btn red' data-act='save'>💾 Salvar no celular</button>"+(DP?"<button class='btn' data-act='install'>📲 Instalar app</button>":"")+"<button class='btn' data-act='theme'>Tema: "+(S.th=="auto"?"automático":S.th=="dark"?"escuro":"claro")+"</button><button class='btn' data-act='bk'>Copiar backup</button><button class='btn' data-act='rs'>Restaurar backup</button><button class='btn red' data-act='reset'>Zerar progresso</button>";
+ h+="<div class='t' style='margin-top:10px'>O progresso fica salvo neste navegador. Use o backup para levar para outro aparelho.</div>";
+ return h}
+function render(){var y=window.scrollY;app.innerHTML=V.tab=="hoje"?vHoje():V.tab=="sem"?vSem():V.tab=="mat"?vMat():V.tab=="q"?vQ():vProg();
+ document.querySelectorAll("#nav button").forEach(function(b){b.className=b.dataset.v==V.tab?"on":""});
+ window.scrollTo(0,y);if(V.tab=="sem"){var on=app.querySelector(".wc.on");if(on&&!render.k){render.k=1;on.scrollIntoView({inline:"center",block:"nearest"})}}}
+function fmt(ms){var s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function tbar(){var b=document.getElementById("tb");if(!T){b.className="";return}b.className="on"+(T.left<=0?" end":"");
+ document.getElementById("tn").textContent=byKey[T.k].sub+" · "+byKey[T.k].top.slice(0,40);
+ document.getElementById("tt").textContent=T.left<=0?"Tempo!":fmt(T.left);document.getElementById("tp").textContent=T.run?"⏸":"▶"}
+function beep(){try{var a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=880;g.gain.value=.2;o.start();o.stop(a.currentTime+.6)}catch(e){}}
+async function lock(on){try{if(on&&navigator.wakeLock){wl=await navigator.wakeLock.request("screen")}else if(wl){wl.release();wl=null}}catch(e){}}
+function tstop(){T=null;lock(false);tbar();render()}
+setInterval(function(){if(T&&T.run){T.left=T.end-Date.now();if(T.left<=0){T.left=0;T.run=false;vib([300,150,300,150,500]);beep();toast("Tempo esgotado! Marque como concluída.");lock(false);render()}tbar()}},500);
+document.addEventListener("visibilitychange",function(){if(!document.hidden&&T&&T.run)lock(true)});
+document.addEventListener("click",function(e){var b=e.target.closest("[data-act]");if(!b)return;var a=b.dataset.act;
+ if(a=="tab"){V.tab=b.dataset.v;if(V.tab!="mat")V.sub=null;window.scrollTo(0,0);render();return}
+ if(a=="chk"){var k=b.dataset.k,v=!done(k);setDone(k,v);vib(v?25:10);render();if(v){var q=frac(function(i){return i.w==byKey[k].w&&i.d==byKey[k].d});if(q[0]==q[1])toast("Dia concluído! 🎉")}return}
+ if(a=="start"){var k=b.dataset.k;if(T&&T.k==k){if(T.left<=0)T.left=byKey[k].min*6e4;T.run=!T.run;if(T.run)T.end=Date.now()+T.left;else T.left=T.end-Date.now();lock(T.run)}else{var m=byKey[k].min*6e4;T={k:k,left:m,run:true,end:Date.now()+m};lock(true);toast("Cronômetro de "+byKey[k].min+" min iniciado")}tbar();render();return}
+ if(a=="tpause"){if(!T)return;if(T.left<=0){T.left=byKey[T.k].min*6e4}if(T.run){T.left=T.end-Date.now();T.run=false;lock(false)}else{T.end=Date.now()+T.left;T.run=true;lock(true)}tbar();render();return}
+ if(a=="tdone"){if(T){setDone(T.k,true);vib(25)}tstop();return}
+ if(a=="tstop"){tstop();return}
+ if(a=="save"){saveNow();return}
+ if(a=="install"){if(DP){DP.prompt();DP=null;render()}return}
+ if(a=="setstart"||a=="chgstart"){var el=document.getElementById(a=="setstart"?"sd":"sd2");if(!el||!el.value){toast("Escolha uma data");return}S.start=el.value;calcStart();save();V.week=null;render();toast("Início: "+fm(pdate(S.start)));return}
+ if(a=="qadd"){var kk=b.dataset.s+"|"+b.dataset.i,qf=b.dataset.f,qq=S.q[kk]||(S.q[kk]={c:0,e:0});qq[qf]=Math.max(0,(qq[qf]||0)+(+b.dataset.n));save();vib(10);render();return}
+ if(a=="qsort"){S.qs=S.qs=="err"?"ed":"err";save();render();return}
+ if(a=="week"){V.week=+b.dataset.w;render();return}
+ if(a=="goweek"){V.week=+b.dataset.w;V.tab="sem";window.scrollTo(0,0);render();return}
+ if(a=="sub"){V.sub=b.dataset.s||null;window.scrollTo(0,0);render();return}
+ if(a=="theme"){S.th=S.th=="auto"?"dark":S.th=="dark"?"light":"auto";save();theme();render();return}
+ if(a=="bk"){var j=JSON.stringify(S);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(j).then(function(){toast("Backup copiado")},function(){prompt("Copie o backup:",j)})}else prompt("Copie o backup:",j);return}
+ if(a=="rs"){var x=prompt("Cole o backup aqui:");if(x){try{var o=JSON.parse(x);S=Object.assign({c:{},l:{},th:"auto",q:{},start:null,saved:0},o);calcStart();save();theme();V.week=null;render();toast("Backup restaurado")}catch(er){toast("Backup inválido")}}return}
+ if(a=="reset"){if(confirm("Zerar todo o progresso?")){S={c:{},l:{},th:S.th,q:{},start:S.start,saved:0};save();render();toast("Progresso zerado")}return}
+});
+app.addEventListener("toggle",function(e){var d=e.target.dataset&&e.target.dataset.d;if(d)O[d]=e.target.open},true);
+document.addEventListener("change",function(e){var i=e.target;if(i.dataset&&i.dataset.q!==undefined){var kk=i.dataset.q+"|"+i.dataset.i,qq=S.q[kk]||(S.q[kk]={c:0,e:0});qq[i.dataset.f]=Math.max(0,Math.floor(+i.value)||0);save();render()}});
+function prevDate(e){var t=e.target;if(!t||(t.id!="sd"&&t.id!="sd2")||!t.value)return;var pv=document.getElementById(t.id=="sd"?"prev":"prev2");if(pv)pv.textContent=fmy(endFor(pdate(t.value)))}
+document.addEventListener("input",prevDate);document.addEventListener("change",prevDate);
+var sx=0,sy=0;
+document.addEventListener("touchstart",function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+document.addEventListener("touchend",function(e){if(V.tab!="sem"||e.target.closest("#wr"))return;var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+ if(Math.abs(dx)>70&&Math.abs(dy)<45){var n=V.week+(dx<0?1:-1);if(n>=0&&n<12){V.week=n;vib(10);render();window.scrollTo(0,0)}}},{passive:true});
+var DP=null;
+if(window.addEventListener){window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();DP=e});window.addEventListener("appinstalled",function(){DP=null;toast("App instalado!")})}
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+try{if("serviceWorker" in navigator&&location.protocol.indexOf("http")==0)navigator.serviceWorker.register("sw.js")}catch(e){}
+function theme(){document.documentElement.setAttribute("data-th",S.th)}
+theme();render();
+})();
+</script>
+</body>
+</html>

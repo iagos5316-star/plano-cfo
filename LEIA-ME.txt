@@ -1,0 +1,7 @@
+Plano de Estudos CFO - CBMPI (aplicativo)
+
+1) Publique esta pasta em um endereco https (GitHub Pages ou Netlify).
+2) Abra o link no Chrome do celular.
+3) Menu (tres pontos) > Instalar app (ou Adicionar a tela inicial).
+Depois de aberto uma vez, funciona sem internet e o progresso fica salvo no aparelho.
+Use Progresso > Copiar backup de vez em quando.
